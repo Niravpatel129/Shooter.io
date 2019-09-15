@@ -1,16 +1,8 @@
+var socket = io();
+
 var player;
 var sprite;
 var spritesheet;
-var socket = io();
-
-var localPlayer = {
-  x: 0,
-  y: 0,
-  xstart: 0,
-  ystart: 0,
-  skinHeight: 0,
-  skinWidth: 0
-};
 
 // inital
 localPlayer.x = 0;
@@ -60,4 +52,5 @@ function draw() {
 
 function mousePressed() {
   console.log("mouse pressed");
+  localPlayer.x += 10;
 }
