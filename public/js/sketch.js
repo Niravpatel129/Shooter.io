@@ -1,6 +1,25 @@
 var player;
-
+var sprite;
+var spritesheet;
 var socket = io();
+
+var localPlayer = {
+  x: 0,
+  y: 0,
+  xstart: 0,
+  ystart: 0,
+  skinHeight: 0,
+  skinWidth: 0
+};
+
+// inital
+localPlayer.x = 0;
+localPlayer.y = 0;
+
+localPlayer.xstart = 0;
+localPlayer.ystart = 0;
+localPlayer.skinHeight = 120;
+localPlayer.skinWidth = 120;
 
 socket.on("connect", () => {
   console.log("connection was sucessful");
@@ -8,9 +27,37 @@ socket.on("connect", () => {
 
 // draw function
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(displayWidth, displayHeight);
+
+  //load spritesheet
+  spritesheet = loadImage("./assets/spritesheet.png");
+
+  // make a new player object from player.js
+  // set the data to it, possiblity hold the data locally?
 }
 
 function draw() {
-  background(51);
+  background(200);
+  // draw client player
+  image(
+    spritesheet,
+    localPlayer.x,
+    localPlayer.y,
+    (sWidth = 120),
+    (sHeight = 120),
+    0,
+    0,
+    100,
+    100
+  );
+
+  // draw server player
+
+  // draw server + client objects
+
+  // interactions --- should be tough :(
+}
+
+function mousePressed() {
+  console.log("mouse pressed");
 }
