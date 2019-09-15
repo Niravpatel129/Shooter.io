@@ -8,7 +8,9 @@ socket.on("connect", () => {
 
 // draw function
 function setup() {
-  createCanvas(640, 480);
+  createCanvas(windowWidth, windowHeight);
 }
 
-function draw() {}
+function draw() {
+  background(51);
+}
