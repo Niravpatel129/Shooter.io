@@ -1,8 +1,11 @@
-var express = require("express");
+const http = require("http");
+const express = require("express");
+const socketIO = require("socket.io");
+var connections = [];
+const port = process.env.PORT || 3000;
 var app = express();
-var http = require("http").createServer(app);
-var io = require("socket.io")(http);
-var port = process.env.PORT || 3000;
+var server = http.createServer(app);
+var io = socketIO(server);
 app.use(express.static("public"));
 
 app.get("/", function(req, res) {
@@ -17,6 +20,6 @@ io.on("connection", function(socket) {
   });
 });
 
-http.listen(port, function() {
-  console.log("listening on *:", port);
+server.listen(port, () => {
+  console.log(`Server is up on ${port}`);
 });
