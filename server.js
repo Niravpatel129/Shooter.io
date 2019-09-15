@@ -8,10 +8,6 @@ var server = http.createServer(app);
 var io = socketIO(server);
 app.use(express.static("public"));
 
-app.get("/", function(req, res) {
-  res.sendFile(__dirname + "/public/index.html");
-});
-
 io.on("connection", function(socket) {
   console.log("a user connected");
 
