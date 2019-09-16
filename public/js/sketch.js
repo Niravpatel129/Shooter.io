@@ -6,6 +6,19 @@ var spritesheet;
 var speed = 5;
 var serverPlayers;
 // inital
+
+let bulletsFired = [];
+let targetBalloons = [];
+let mainTurrent;
+let turPosX = 300;
+let turPosY = 300;
+let targetTimer = 0;
+let balloonSpawnMultiplier = 2;
+let balloonSizeMultiplier = 2;
+let score = 0;
+let Retry;
+
+//
 localPlayer.x = 0;
 localPlayer.y = 0;
 
@@ -13,6 +26,8 @@ localPlayer.xstart = 0;
 localPlayer.ystart = 0;
 localPlayer.skinHeight = 100;
 localPlayer.skinWidth = 100;
+
+bullets = [];
 
 socket.on("connect", () => {
   console.log("connection was sucessful");
@@ -41,6 +56,15 @@ function draw() {
   fill(1000);
   circle(30, 30, 200);
 
+  //draw bullets
+  for (var i = 0; i < bulletsFired.length; i++) {
+    bulletsFired[i].display();
+    bulletsFired[i].update();
+    if (bulletsFired[i].outOfBounds()) {
+      bulletsFired.splice(i, 1);
+    }
+  }
+
   // draw client player
   stroke(127, 63, 120);
   fill(100, 40, 192, 127);
@@ -58,19 +82,22 @@ function draw() {
 
 function mousePressed() {
   console.log("mouse pressed");
+  let mouseVector = getMouseVector();
+  oneBullet = new bullet(mouseVector.x, mouseVector.y);
+  bulletsFired.push(oneBullet);
 }
 
 var checkIfMouseDown = () => {
-  if (keyIsDown(37)) {
+  if (keyIsDown(37) || keyIsDown(65)) {
     localPlayer.x -= speed;
   }
-  if (keyIsDown(38)) {
+  if (keyIsDown(38) || keyIsDown(87)) {
     localPlayer.y -= speed;
   }
-  if (keyIsDown(39)) {
+  if (keyIsDown(39) || keyIsDown(68)) {
     localPlayer.x += speed;
   }
-  if (keyIsDown(40)) {
+  if (keyIsDown(40) || keyIsDown(83)) {
     localPlayer.y += speed;
   }
 };
