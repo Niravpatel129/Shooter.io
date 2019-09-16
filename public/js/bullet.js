@@ -33,9 +33,7 @@ class bullet {
   }
 
   outOfBounds() {
-    return (
-      this.x > 80000 + 10 || this.x < -10 || this.y > 80000 + 10 || this.y < -10
-    );
+    return false;
   }
 
   //   hitScan() {
