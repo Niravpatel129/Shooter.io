@@ -1,16 +1,14 @@
-function getMouseVector() {
-  console.log(mouseX, mouseY);
-  let mouseXalt = mouseX - localPlayer.x;
-  let mouseYalt = mouseY - localPlayer.y;
-  let mouseDir = createVector(mouseXalt, mouseYalt);
-  mouseDir.normalize();
-  return mouseDir;
+function getDirectionTo(blockX, blockY, mouseX, mouseY) {
+  let resultingX = mouseX - blockX;
+  let resultingY = mouseY - blockY;
+  let magnitude = Math.sqrt(Math.pow(resultingX, 2) + Math.pow(resultingY, 2));
+  return [resultingX / magnitude, resultingY / magnitude];
 }
 
 class bullet {
   constructor(xSpd, ySpd) {
-    this.x = localPlayer.x + 50;
-    this.y = localPlayer.y + 50;
+    this.x = localPlayer.x;
+    this.y = localPlayer.y;
     this.xSpd = 12 * xSpd;
     this.ySpd = 12 * ySpd;
   }

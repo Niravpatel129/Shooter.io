@@ -46,7 +46,7 @@ function setup() {
 
 function draw() {
   //translate the scene with player movement keeping it centered
-  translate(width / 2 - localPlayer.x, height / 2.5 - localPlayer.y);
+  // translate(-localPlayer.x, -localPlayer.y);
 
   //check for keyboard+mouse input
   checkIfMouseDown();
@@ -82,8 +82,14 @@ function draw() {
 
 function mousePressed() {
   console.log("mouse pressed");
-  let mouseVector = getMouseVector();
-  oneBullet = new bullet(mouseVector.x, mouseVector.y);
+  let mouseVector = getDirectionTo(
+    localPlayer.x,
+    localPlayer.y,
+    mouseX,
+    mouseY
+  );
+  console.log(mouseVector);
+  oneBullet = new bullet(mouseVector[0], mouseVector[1]);
   bulletsFired.push(oneBullet);
 }
 
