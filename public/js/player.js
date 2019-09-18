@@ -1,12 +1,38 @@
-// this should hold the information about the local player
-// x ,y of current pos
-// skin
-// direction facing
-var localPlayer = {
-  x: 0,
-  y: 0,
-  xstart: 0,
-  ystart: 0,
-  skinHeight: 0,
-  skinWidth: 0
-};
+class Player {
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.speed = 5;
+  }
+
+  move() {
+    if (keyIsDown(37) || keyIsDown(65)) {
+      this.x -= this.speed;
+    }
+    if (keyIsDown(38) || keyIsDown(87)) {
+      this.y -= this.speed;
+    }
+    if (keyIsDown(39) || keyIsDown(68)) {
+      this.x += this.speed;
+    }
+    if (keyIsDown(40) || keyIsDown(83)) {
+      this.y += this.speed;
+    }
+  }
+
+  shoot() {
+    let mouseVector = getDirectionTo(mouseX, mouseY, width, height);
+    let oneBullet = new bullet(this.x, this.y, mouseVector[0], mouseVector[1]);
+    bulletsFired.push(oneBullet);
+  }
+
+  draw() {
+    stroke(127, 63, 120);
+    fill(100, 40, 192, 127);
+    rect(this.x, this.y, 90, 90);
+  }
+
+  emitToServer() {
+    socket.emit("playerData", this);
+  }
+}

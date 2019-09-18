@@ -8,9 +8,9 @@ function getDirectionTo(mouseX, mouseY, width, height) {
 }
 
 class bullet {
-  constructor(xSpd, ySpd) {
-    this.x = localPlayer.x;
-    this.y = localPlayer.y;
+  constructor(x, y, xSpd, ySpd) {
+    this.x = x;
+    this.y = y;
     this.xSpd = 12 * xSpd;
     this.ySpd = 12 * ySpd;
   }
