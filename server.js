@@ -1,7 +1,6 @@
 const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
-var connections = [];
 const { Users } = require("./utils/users");
 var users = new Users();
 
@@ -12,11 +11,22 @@ var io = socketIO(server);
 app.use(express.static("public"));
 
 io.on("connection", function(socket) {
-  console.log("a user connected");
-  // users.addUser(socket.id, params.name, params.room);
-  // console.log(users);
+  socket.emit("assignSelfID", socket.id);
+  socket.on("firstConnect", data => {
+    users.addUser(socket.id, data.x, data.y);
+  });
   socket.on("playerData", data => {
     socket.broadcast.emit("playerData", data);
+  });
+
+  socket.on("update", data => {
+    users.updateUserCords(socket.id, data.x, data.y);
+    io.emit("serverUsers", users);
+  });
+
+  socket.on("disconnect", function() {
+    console.log("user left :(");
+    users.removeUser(socket.id);
   });
 });
 

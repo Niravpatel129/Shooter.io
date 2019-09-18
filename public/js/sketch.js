@@ -1,5 +1,7 @@
 var socket = io();
 
+var selfSocketId;
+
 var serverPlayers;
 // inital
 
@@ -45,15 +47,14 @@ function draw() {
   player.draw();
   player.move();
   player.emitToServer();
-  // if there is user on the server Draw them!
+
+  // draw server player
   if (serverPlayers) {
-    fill(200, 120, 192, 127);
-    rect(serverPlayers.x, serverPlayers.y, 90, 90);
+    for (let j = 0; j < serverPlayers.length; j++) {
+      fill(200, 120, 192, 127);
+      rect(serverPlayers[j].x, serverPlayers[j].y, 90, 90);
+    }
   }
-
-  //emit constntly the local player data
-
-  // socket.emit("playerData", player);
 }
 
 function mousePressed() {
@@ -66,4 +67,18 @@ var checkIfKeyDown = () => {
 
 socket.on("playerData", data => {
   serverPlayers = data;
+});
+
+socket.on("serverUsers", data => {
+  var listOfClients = data;
+  for (var i = 0; i < listOfClients.users.length; i++) {
+    if (data.users[i].id === selfSocketId) {
+      listOfClients.users.splice(i, 1);
+    }
+  }
+  serverPlayers = listOfClients.users;
+});
+
+socket.on("assignSelfID", data => {
+  selfSocketId = data;
 });

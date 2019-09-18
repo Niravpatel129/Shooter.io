@@ -2,8 +2,8 @@ class Users {
   constructor() {
     this.users = [];
   }
-  addUser(id, name, room, avatar) {
-    var user = { id, name, room, avatar };
+  addUser(id, x, y) {
+    var user = { id, x, y };
     this.users.push(user);
     return user;
   }
@@ -20,6 +20,15 @@ class Users {
     return this.users.filter(user => user.id === id)[0];
   }
 
+  updateUserCords(socketid, x, y) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id === socketid) {
+        this.users[i].x = x;
+        this.users[i].y = y;
+      }
+    }
+  }
+
   getUserList(room) {
     var newArray = [];
     var users = this.users.filter(user => user.room === room);
@@ -32,8 +41,6 @@ class Users {
       }
       newArray.push(temppush);
     });
-    // console.log(newArray);
-    // return namesArray;
     return newArray;
   }
 

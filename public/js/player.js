@@ -3,6 +3,7 @@ class Player {
     this.x = 0;
     this.y = 0;
     this.speed = 5;
+    socket.emit("firstConnect", this);
   }
 
   move() {
@@ -33,6 +34,6 @@ class Player {
   }
 
   emitToServer() {
-    socket.emit("playerData", this);
+    socket.emit("update", this);
   }
 }
