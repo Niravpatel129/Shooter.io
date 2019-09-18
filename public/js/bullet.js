@@ -1,6 +1,8 @@
-function getDirectionTo(blockX, blockY, mouseX, mouseY) {
-  let resultingX = mouseX - blockX;
-  let resultingY = mouseY - blockY;
+function getDirectionTo(mouseX, mouseY, width, height) {
+  let mx = mouseX - width / 2;
+  let my = mouseY - height / 2;
+  let resultingX = mx;
+  let resultingY = my;
   let magnitude = Math.sqrt(Math.pow(resultingX, 2) + Math.pow(resultingY, 2));
   return [resultingX / magnitude, resultingY / magnitude];
 }

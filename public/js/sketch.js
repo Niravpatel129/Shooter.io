@@ -46,7 +46,7 @@ function setup() {
 
 function draw() {
   //translate the scene with player movement keeping it centered
-  // translate(-localPlayer.x, -localPlayer.y);
+  translate(width / 2 - localPlayer.x, height / 2 - localPlayer.y);
 
   //check for keyboard+mouse input
   checkIfMouseDown();
@@ -77,18 +77,13 @@ function draw() {
   }
 
   //emit constntly the local player data
+
   socket.emit("playerData", localPlayer);
 }
 
 function mousePressed() {
-  console.log("mouse pressed");
-  let mouseVector = getDirectionTo(
-    localPlayer.x,
-    localPlayer.y,
-    mouseX,
-    mouseY
-  );
-  console.log(mouseVector);
+  newChange = true;
+  let mouseVector = getDirectionTo(mouseX, mouseY, width, height);
   oneBullet = new bullet(mouseVector[0], mouseVector[1]);
   bulletsFired.push(oneBullet);
 }
@@ -110,5 +105,4 @@ var checkIfMouseDown = () => {
 
 socket.on("playerData", data => {
   serverPlayers = data;
-  console.log(serverPlayers);
 });
