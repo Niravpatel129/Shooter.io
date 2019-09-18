@@ -6,7 +6,6 @@ var serverPlayers;
 // inital
 
 let bulletsFired = [];
-let targetBalloons = [];
 
 //
 
@@ -52,7 +51,19 @@ function draw() {
   if (serverPlayers) {
     for (let j = 0; j < serverPlayers.length; j++) {
       fill(200, 120, 192, 127);
-      rect(serverPlayers[j].x, serverPlayers[j].y, 90, 90);
+      ellipse(serverPlayers[j].x, serverPlayers[j].y, 90, 90);
+
+      //draw server bullets
+      if (serverPlayers[j].bullets.length > 0) {
+        // console.log(serverPlayers[j].bullets[0]);
+        for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
+          ellipse(
+            serverPlayers[j].bullets[m].x,
+            serverPlayers[j].bullets[m].y,
+            60
+          );
+        }
+      }
     }
   }
 }

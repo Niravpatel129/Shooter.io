@@ -3,6 +3,7 @@ class Player {
     this.x = 0;
     this.y = 0;
     this.speed = 5;
+    this.bullets = bulletsFired;
     socket.emit("firstConnect", this);
   }
 
@@ -28,9 +29,10 @@ class Player {
   }
 
   draw() {
+    this.bullets = bulletsFired;
     stroke(127, 63, 120);
     fill(100, 40, 192, 127);
-    rect(this.x, this.y, 90, 90);
+    ellipse(this.x, this.y, 90, 90);
   }
 
   emitToServer() {
