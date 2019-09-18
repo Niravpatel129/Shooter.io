@@ -9,6 +9,8 @@ function getDirectionTo(mouseX, mouseY, width, height) {
 
 class bullet {
   constructor(x, y, xSpd, ySpd) {
+    this.startingX = player.x;
+    this.startingY = player.y;
     this.x = x;
     this.y = y;
     this.xSpd = 12 * xSpd;
@@ -33,7 +35,14 @@ class bullet {
   }
 
   outOfBounds() {
-    return false;
+    let xdis = this.startingX - this.x;
+    let ydis = this.startingY - this.y;
+
+    if (xdis > 450 || ydis > 450) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   //   hitScan() {
