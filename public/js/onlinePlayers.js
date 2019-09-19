@@ -14,10 +14,17 @@ class OnlinePlayer {
   draw() {
     if (serverPlayers) {
       for (let j = 0; j < serverPlayers.length; j++) {
-        fill(this.color);
+        if (serverPlayers[j].alive === false) {
+          fill("#333333");
+          this.text = "Dead :X";
+        } else {
+          this.text = "OPPONENT";
+          fill(this.color);
+        }
         ellipse(serverPlayers[j].x, serverPlayers[j].y, playerSize, playerSize);
 
         //text
+
         textAlign(CENTER);
         fill("#ffffff");
         text(this.text, serverPlayers[j].x, serverPlayers[j].y);

@@ -3,10 +3,27 @@ class Users {
     this.users = [];
     this.bullets = [];
   }
-  addUser(id, x, y, bullets) {
-    let user = { id, x, y, bullets };
+  addUser(id, x, y, bullets, alive) {
+    let user = { id, x, y, bullets, alive };
     this.users.push(user);
     return user;
+  }
+
+  playerDead(id) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id === id) {
+        console.log("died");
+        this.users[i].alive = false;
+      }
+    }
+  }
+
+  playerAlive(id) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id === id) {
+        this.users[i].alive = true;
+      }
+    }
   }
 
   removeUser(id) {
@@ -22,13 +39,14 @@ class Users {
     return this.users.filter(user => user.id === id)[0];
   }
 
-  updateUserCords(socketid, x, y, bullets) {
+  updateUserCords(socketid, x, y, bullets, alive) {
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === socketid) {
         this.users[i].bullets = [];
         this.users[i].x = x;
         this.users[i].y = y;
         this.users[i].bullets = bullets;
+        this.users[i].alive = alive;
       }
     }
   }
