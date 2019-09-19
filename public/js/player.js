@@ -11,18 +11,45 @@ class Player {
   }
 
   move() {
+    let gridRadius = 800;
+    let endColor = "#e35656";
+
     if (this.alive) {
       if (keyIsDown(37) || keyIsDown(65)) {
-        this.x -= this.speed;
+        //LEFT
+        if (this.x >= -gridRadius) {
+          this.x -= this.speed;
+          backgroundColor = "#cbd4d0";
+        } else {
+          backgroundColor = endColor;
+        }
       }
       if (keyIsDown(38) || keyIsDown(87)) {
-        this.y -= this.speed;
+        //UP
+        if (this.y >= -gridRadius) {
+          this.y -= this.speed;
+          backgroundColor = "#cbd4d0";
+        } else {
+          backgroundColor = endColor;
+        }
       }
       if (keyIsDown(39) || keyIsDown(68)) {
-        this.x += this.speed;
+        if (this.x <= gridRadius) {
+          //RIGHT
+          this.x += this.speed;
+          backgroundColor = "#cbd4d0";
+        } else {
+          backgroundColor = endColor;
+        }
       }
       if (keyIsDown(40) || keyIsDown(83)) {
-        this.y += this.speed;
+        //DOWN
+        if (this.y <= gridRadius) {
+          this.y += this.speed;
+          backgroundColor = "#cbd4d0";
+        } else {
+          backgroundColor = endColor;
+        }
       }
     }
   }

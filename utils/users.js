@@ -52,7 +52,6 @@ class Users {
     if (this.users.length > 0) {
       for (var i = 0; i < this.users.length; i++) {
         if (this.users[i].name === name && this.users[i].room === room) {
-          console.log("user round");
           return 1;
         }
       }
@@ -65,7 +64,6 @@ class Users {
     for (var i = 0; i < this.users.length; i++) {
       if (this.users[i].name === name && this.users[i].room === room) {
         if (this.users[i].avatar) {
-          // console.log(this.users[i]);
           return this.users[i].avatar;
         }
       }

@@ -10,6 +10,8 @@ let bulletsFired = [];
 
 //
 
+var backgroundColor = "#cbd4d0";
+
 var playerSize = 50;
 var bulletRadius = 30;
 //
@@ -32,11 +34,14 @@ function draw() {
   translate(width / 2 - player.x, height / 2 - player.y);
   ellipseMode(RADIUS);
   //check for keyboard+mouse input
-
   //draw temp terrain and background
-  background(200);
-  fill(1000);
-  circle(30, 30, 200);
+  background(backgroundColor);
+
+  fill("#f5f5f5"); // Set fill to white
+  //
+  strokeWeight(4);
+  stroke(51);
+  rect(-800, -800, 1600, 1600);
 
   //draw bullets
   for (var i = 0; i < bulletsFired.length; i++) {
@@ -81,7 +86,6 @@ socket.on("serverUsers", data => {
     }
   }
   serverPlayers = listOfClients.users;
-  console.log(serverPlayers);
 });
 
 socket.on("assignSelfID", data => {

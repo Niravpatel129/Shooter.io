@@ -15,7 +15,7 @@ class bullet {
     this.y = y;
     this.xSpd = 12 * xSpd;
     this.ySpd = 12 * ySpd;
-    this.color = color(120, 20, 30);
+    this.color = color(120, 210, 30);
     this.bulletRadius = bulletRadius;
   }
 
@@ -37,8 +37,14 @@ class bullet {
   }
 
   outOfBounds() {
+    console.log(this.x, this.y);
+    let gridRadius = 800;
     let xdis = this.startingX - this.x;
     let ydis = this.startingY - this.y;
+
+    if (this.x <= -800 || this.x >= 800 || this.y <= -800 || this.y >= 800) {
+      return true;
+    }
 
     if (xdis > 550 || ydis > 550) {
       return true;
