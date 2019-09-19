@@ -24,9 +24,12 @@ io.on("connection", function(socket) {
     io.emit("serverUsers", users);
   });
 
-  socket.on("updateBullets", data => {
-    // id, array
-    users.addBullets(data.id, data.bullets);
+  socket.on("playerDead", data => {
+    socket.emit("playerDead", socket.id);
+  });
+
+  socket.on("playerBackAlive", data => {
+    socket.emit("playerBackAlive", socket.id);
   });
 
   socket.on("disconnect", function() {

@@ -15,13 +15,15 @@ class bullet {
     this.y = y;
     this.xSpd = 12 * xSpd;
     this.ySpd = 12 * ySpd;
+    this.color = color(120, 20, 30);
+    this.bulletRadius = bulletRadius;
   }
 
   display() {
     push();
     stroke(55, 255, 0);
-    fill(55, 55, 55, 135);
-    ellipse(this.x, this.y, 60);
+    fill(this.color);
+    ellipse(this.x, this.y, this.bulletRadius);
     pop();
   }
 
@@ -38,29 +40,10 @@ class bullet {
     let xdis = this.startingX - this.x;
     let ydis = this.startingY - this.y;
 
-    if (xdis > 450 || ydis > 450) {
+    if (xdis > 550 || ydis > 550) {
       return true;
     } else {
       return false;
     }
   }
-
-  //   hitScan() {
-  //     for (var i = 0; i < targetBalloons.length; i++) {
-  //       var collideOrNot = collideCircleCircle(
-  //         this.x,
-  //         this.y,
-  //         10,
-  //         targetBalloons[i].myX(),
-  //         targetBalloons[i].myY(),
-  //         targetBalloons[i].myR()
-  //       );
-  //       if (collideOrNot) {
-  //         targetBalloons.splice(i, 1);
-  //         score += 1;
-  //         return true;
-  //       }
-  //     }
-  //     return false;
-  //   }
 }

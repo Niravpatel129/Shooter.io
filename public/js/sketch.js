@@ -3,10 +3,15 @@ var socket = io();
 var selfSocketId;
 
 var serverPlayers;
+var onlinePlayers;
 // inital
 
 let bulletsFired = [];
 
+//
+
+var playerSize = 50;
+var bulletRadius = 30;
 //
 
 bullets = [];
@@ -15,17 +20,17 @@ socket.on("connect", () => {
   console.log("connection was sucessful");
 });
 
-// draw function
 function setup() {
   createCanvas(displayWidth, displayHeight);
 
   player = new Player();
+  onlinePlayers = new OnlinePlayer();
 }
 
 function draw() {
   //translate the scene with player movement keeping it centered
   translate(width / 2 - player.x, height / 2 - player.y);
-
+  ellipseMode(RADIUS);
   //check for keyboard+mouse input
 
   //draw temp terrain and background
@@ -46,26 +51,14 @@ function draw() {
   player.draw();
   player.move();
   player.emitToServer();
+  if (player.checkCollision()) {
+    player.gotHit();
+  }
 
   // draw server player
-  if (serverPlayers) {
-    for (let j = 0; j < serverPlayers.length; j++) {
-      fill(200, 120, 192, 127);
-      ellipse(serverPlayers[j].x, serverPlayers[j].y, 90, 90);
+  onlinePlayers.draw();
 
-      //draw server bullets
-      if (serverPlayers[j].bullets.length > 0) {
-        // console.log(serverPlayers[j].bullets[0]);
-        for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
-          ellipse(
-            serverPlayers[j].bullets[m].x,
-            serverPlayers[j].bullets[m].y,
-            60
-          );
-        }
-      }
-    }
-  }
+  // draw function
 }
 
 function mousePressed() {
@@ -88,6 +81,7 @@ socket.on("serverUsers", data => {
     }
   }
   serverPlayers = listOfClients.users;
+  console.log(serverPlayers);
 });
 
 socket.on("assignSelfID", data => {

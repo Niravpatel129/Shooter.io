@@ -8,13 +8,7 @@ class Users {
     this.users.push(user);
     return user;
   }
-  addBullets(id, bullets) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === id) {
-        this.users[i].bullets = bullets;
-      }
-    }
-  }
+
   removeUser(id) {
     var user = this.getUser(id);
 
@@ -31,6 +25,7 @@ class Users {
   updateUserCords(socketid, x, y, bullets) {
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === socketid) {
+        this.users[i].bullets = [];
         this.users[i].x = x;
         this.users[i].y = y;
         this.users[i].bullets = bullets;
