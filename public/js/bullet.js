@@ -37,7 +37,6 @@ class bullet {
   }
 
   outOfBounds() {
-    console.log(this.x, this.y);
     let gridRadius = 800;
     let xdis = this.startingX - this.x;
     let ydis = this.startingY - this.y;

@@ -2,18 +2,18 @@ const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
 const { Users } = require("./utils/users");
-var users = new Users();
+let users = new Users();
 
 const port = process.env.PORT || 3000;
-var app = express();
-var server = http.createServer(app);
-var io = socketIO(server);
+let app = express();
+let server = http.createServer(app);
+let io = socketIO(server);
 app.use(express.static("public"));
 
 io.on("connection", function(socket) {
   socket.emit("assignSelfID", socket.id);
   socket.on("firstConnect", data => {
-    users.addUser(socket.id, data.x, data.y, data.bullets);
+    users.addUser(socket.id, data.x, data.y, data.bullets, data.isPlayerAlive);
   });
   socket.on("playerData", data => {
     socket.broadcast.emit("playerData", data);
@@ -25,7 +25,7 @@ io.on("connection", function(socket) {
   });
 
   socket.on("playerDead", data => {
-    socket.emit("playerDead", socket.id);
+    socket.broadcast.emit("playerDead", socket.id);
   });
 
   socket.on("playerBackAlive", data => {

@@ -4,13 +4,13 @@ class Users {
     this.bullets = [];
   }
   addUser(id, x, y, bullets) {
-    var user = { id, x, y, bullets };
+    let user = { id, x, y, bullets };
     this.users.push(user);
     return user;
   }
 
   removeUser(id) {
-    var user = this.getUser(id);
+    let user = this.getUser(id);
 
     if (user) {
       this.users = this.users.filter(user => user.id !== id);
@@ -34,14 +34,14 @@ class Users {
   }
 
   getUserList(room) {
-    var newArray = [];
-    var users = this.users.filter(user => user.room === room);
-    var namesArray = users.map(user => user.name);
+    let newArray = [];
+    let users = this.users.filter(user => user.room === room);
+    let namesArray = users.map(user => user.name);
     users.map(user => {
       if (user.avatar) {
-        var temppush = { name: user.name, avatar: user.avatar };
+        let temppush = { name: user.name, avatar: user.avatar };
       } else {
-        var temppush = { name: user.name };
+        let temppush = { name: user.name };
       }
       newArray.push(temppush);
     });
@@ -50,7 +50,7 @@ class Users {
 
   getUserName(name, room) {
     if (this.users.length > 0) {
-      for (var i = 0; i < this.users.length; i++) {
+      for (let i = 0; i < this.users.length; i++) {
         if (this.users[i].name === name && this.users[i].room === room) {
           return 1;
         }
@@ -61,7 +61,7 @@ class Users {
   }
 
   getUserAvatar(name, room) {
-    for (var i = 0; i < this.users.length; i++) {
+    for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].name === name && this.users[i].room === room) {
         if (this.users[i].avatar) {
           return this.users[i].avatar;
@@ -71,24 +71,24 @@ class Users {
   }
 
   getRoomList() {
-    var Currentrooms = [];
+    let Currentrooms = [];
     this.users.map(dat => {
       Currentrooms.push(dat.room);
     });
-    var Currentrooms;
+    let Currentrooms;
 
-    var newArr = Currentrooms;
+    let newArr = Currentrooms;
 
-    for (var h = 0; h < Currentrooms.length; h++) {
-      var curItem = Currentrooms[h];
-      var foundCount = 0;
+    for (let h = 0; h < Currentrooms.length; h++) {
+      let curItem = Currentrooms[h];
+      let foundCount = 0;
       // search array for item
-      for (var i = 0; i < Currentrooms.length; i++) {
+      for (let i = 0; i < Currentrooms.length; i++) {
         if (Currentrooms[i] == Currentrooms[h]) foundCount++;
       }
       if (foundCount > 1) {
         // remove repeated item from new array
-        for (var j = 0; j < newArr.length; j++) {
+        for (let j = 0; j < newArr.length; j++) {
           if (newArr[j] == curItem) {
             newArr.splice(j, 1);
             j = j - 1;
@@ -100,8 +100,8 @@ class Users {
   }
 
   getUserSocketList(room) {
-    var users = this.users.filter(user => user.room === room);
-    var socketsArray = users.map(user => user.id);
+    let users = this.users.filter(user => user.room === room);
+    let socketsArray = users.map(user => user.id);
 
     return socketsArray;
   }

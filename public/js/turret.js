@@ -25,8 +25,8 @@ class turrent {
   }
 
   hitScan() {
-    for (var i = 0; i < targetBalloons.length; i++) {
-      var collideOrNot = collideCircleCircle(
+    for (let i = 0; i < targetBalloons.length; i++) {
+      let collideOrNot = collideCircleCircle(
         turPosX,
         turPosY,
         30,

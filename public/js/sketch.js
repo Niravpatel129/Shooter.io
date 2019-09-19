@@ -1,19 +1,19 @@
-var socket = io();
+let socket = io();
 
-var selfSocketId;
+let selfSocketId;
 
-var serverPlayers;
-var onlinePlayers;
+let serverPlayers;
+let onlinePlayers;
 // inital
 
 let bulletsFired = [];
 
 //
 
-var backgroundColor = "#cbd4d0";
+let backgroundColor = "#cbd4d0";
 
-var playerSize = 50;
-var bulletRadius = 30;
+let playerSize = 50;
+let bulletRadius = 30;
 //
 
 bullets = [];
@@ -44,7 +44,7 @@ function draw() {
   rect(-800, -800, 1600, 1600);
 
   //draw bullets
-  for (var i = 0; i < bulletsFired.length; i++) {
+  for (let i = 0; i < bulletsFired.length; i++) {
     bulletsFired[i].display();
     bulletsFired[i].update();
     if (bulletsFired[i].outOfBounds()) {
@@ -70,7 +70,7 @@ function mousePressed() {
   player.shoot();
 }
 
-var checkIfKeyDown = () => {
+let checkIfKeyDown = () => {
   player.move();
 };
 
@@ -79,8 +79,8 @@ socket.on("playerData", data => {
 });
 
 socket.on("serverUsers", data => {
-  var listOfClients = data;
-  for (var i = 0; i < listOfClients.users.length; i++) {
+  let listOfClients = data;
+  for (let i = 0; i < listOfClients.users.length; i++) {
     if (data.users[i].id === selfSocketId) {
       listOfClients.users.splice(i, 1);
     }
@@ -91,3 +91,7 @@ socket.on("serverUsers", data => {
 socket.on("assignSelfID", data => {
   selfSocketId = data;
 });
+
+socket.on("playerDead", data => {});
+
+socket.on("playerAlive", data => {});

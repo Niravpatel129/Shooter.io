@@ -6,7 +6,7 @@
 
 class OnlinePlayer {
   constructor() {
-    this.color = color(255);
+    this.color = "#c878c0";
     this.text = "OPPONENT";
     this.bulletRadius = bulletRadius;
   }
@@ -14,12 +14,12 @@ class OnlinePlayer {
   draw() {
     if (serverPlayers) {
       for (let j = 0; j < serverPlayers.length; j++) {
-        fill(200, 120, 192);
+        fill(this.color);
         ellipse(serverPlayers[j].x, serverPlayers[j].y, playerSize, playerSize);
 
         //text
         textAlign(CENTER);
-        fill(this.color);
+        fill("#ffffff");
         text(this.text, serverPlayers[j].x, serverPlayers[j].y);
 
         //draw server bullets

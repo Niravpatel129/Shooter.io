@@ -8,6 +8,7 @@ class Player {
     this.alive = true;
     socket.emit("firstConnect", this);
     this.playerName = "You";
+    this.isPlayerAlive = true;
   }
 
   move() {
@@ -81,12 +82,12 @@ class Player {
 
   checkCollision() {
     if (this.alive) {
-      var localVector = createVector(this.x, this.y);
+      let localVector = createVector(this.x, this.y);
       if (serverPlayers) {
         for (let j = 0; j < serverPlayers.length; j++) {
           if (serverPlayers[j].bullets.length > 0) {
             for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
-              var d = p5.Vector.dist(
+              let d = p5.Vector.dist(
                 localVector,
                 createVector(
                   serverPlayers[j].bullets[m].x,
@@ -106,7 +107,7 @@ class Player {
   }
 
   gotHit() {
-    socket.emit("playerDead");
+    socket.emit("playerDead", selfSocketId);
     this.alive = false;
     this.color = color(1, 1, 1);
     this.playerName = "Dead :X";
