@@ -17,9 +17,12 @@
 
 .killMessage {
   display: none;
-  background-color: lightblue;
+  color: blue;
+  background-color: cornsilk;
+  border-radius: 70px;
   position: absolute;
   margin: 25px;
   padding: 10px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   border: 2px solid black;
 }
