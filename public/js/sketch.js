@@ -62,8 +62,6 @@ function draw() {
 
   // draw server player
   onlinePlayers.draw();
-
-  // draw function
 }
 
 function mousePressed() {
@@ -73,10 +71,6 @@ function mousePressed() {
 let checkIfKeyDown = () => {
   player.move();
 };
-
-socket.on("playerData", data => {
-  serverPlayers = data;
-});
 
 socket.on("serverUsers", data => {
   let listOfClients = data;

@@ -15,9 +15,6 @@ io.on("connection", function(socket) {
   socket.on("firstConnect", data => {
     users.addUser(socket.id, data.x, data.y, data.bullets, data.alive);
   });
-  // socket.on("playerData", data => {
-  //   socket.broadcast.emit("playerData", data);
-  // });
 
   socket.on("update", data => {
     users.updateUserCords(socket.id, data.x, data.y, data.bullets, data.alive);
