@@ -87,9 +87,7 @@ socket.on("playerDead", data => {});
 
 socket.on("playerAlive", data => {});
 
-socket.on(
-  "showKillMessage",
-  data(() => {
-    deadPlayersMessage.push(data);
-  })
-);
+socket.on("showKillMessage", data => {
+  deadPlayersMessage.push(data);
+  showKillMessage();
+});

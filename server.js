@@ -45,7 +45,7 @@ io.on("connection", function(socket) {
   });
 
   socket.on("showKillMessage", function(data) {
-    socket.emit("showKillMessage", data);
+    io.emit("showKillMessage", data);
   });
 });
 

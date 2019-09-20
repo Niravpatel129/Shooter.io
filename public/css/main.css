@@ -16,7 +16,8 @@
 }
 
 .killMessage {
-  visibility: hidden;
+  display: none;
+  background-color: lightblue;
   position: absolute;
   margin: 25px;
   padding: 10px;
