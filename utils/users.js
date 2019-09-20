@@ -93,7 +93,6 @@ class Users {
     this.users.map(dat => {
       Currentrooms.push(dat.room);
     });
-    let Currentrooms;
 
     let newArr = Currentrooms;
 
