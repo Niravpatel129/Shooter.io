@@ -45,7 +45,7 @@ class bullet {
       return true;
     }
 
-    if (xdis > 550 || ydis > 550) {
+    if (xdis > 550 || xdis < -550 || ydis > 550 || ydis < -550) {
       return true;
     } else {
       return false;

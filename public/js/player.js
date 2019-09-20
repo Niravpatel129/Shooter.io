@@ -81,6 +81,7 @@ class Player {
   }
 
   gotHit() {
+    console.log("got hit");
     socket.emit("playerDead", selfSocketId);
     this.alive = false;
     this.color = color(1, 1, 1);

@@ -7,7 +7,6 @@ function showKillMessage() {
       if (playersInMessage[0] === socket.id) {
         playersInMessage[0] = "<b style='color: blue'>YOU</b>";
       }
-      console.log(playersInMessage[1], socket.id);
 
       if (playersInMessage[1] === socket.id) {
         playersInMessage[1] = "<b style='color: blue'>YOU</b>";
