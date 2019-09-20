@@ -56,8 +56,6 @@ function draw() {
   player.draw();
   player.move();
   player.emitToServer();
-  if (player.checkCollision()) {
-  }
 
   // draw server player
   onlinePlayers.draw();
