@@ -80,32 +80,6 @@ class Player {
     text(this.playerName, this.x, this.y);
   }
 
-  checkCollision() {
-    if (this.alive) {
-      let localVector = createVector(this.x, this.y);
-      if (serverPlayers) {
-        for (let j = 0; j < serverPlayers.length; j++) {
-          if (serverPlayers[j].bullets.length > 0) {
-            for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
-              let d = p5.Vector.dist(
-                localVector,
-                createVector(
-                  serverPlayers[j].bullets[m].x,
-                  serverPlayers[j].bullets[m].y
-                )
-              );
-              if (d < playerSize + 30) {
-                return true;
-              } else {
-                return false;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
   gotHit() {
     socket.emit("playerDead", selfSocketId);
     this.alive = false;

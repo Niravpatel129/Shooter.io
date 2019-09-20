@@ -37,6 +37,21 @@ class OnlinePlayer {
               serverPlayers[j].bullets[m].y,
               this.bulletRadius
             );
+
+            // CHECK COLLISION FOR THESE BULLETS ^
+            if (player.alive) {
+              let serverBulletVector = createVector(
+                serverPlayers[j].bullets[m].x,
+                serverPlayers[j].bullets[m].y
+              );
+              let localVector = createVector(player.x, player.y);
+              let d = p5.Vector.dist(localVector, serverBulletVector);
+              arrayofShots.push(d);
+
+              if (d <= playerSize + 30) {
+                player.gotHit();
+              }
+            }
           }
         }
       }

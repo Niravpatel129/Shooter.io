@@ -1,7 +1,7 @@
 let socket = io();
 
 let selfSocketId;
-
+var arrayofShots = [];
 let serverPlayers;
 let onlinePlayers;
 // inital
@@ -57,7 +57,6 @@ function draw() {
   player.move();
   player.emitToServer();
   if (player.checkCollision()) {
-    player.gotHit();
   }
 
   // draw server player
