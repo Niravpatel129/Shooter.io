@@ -50,6 +50,7 @@ class OnlinePlayer {
 
               if (d <= playerSize + 30) {
                 player.gotHit();
+                console.log(`${serverPlayers[j].id} killed ${socket.id}`);
               }
             }
           }

@@ -7,7 +7,7 @@ let onlinePlayers;
 // inital
 
 let bulletsFired = [];
-
+let deadPlayersMessage = [];
 //
 
 let backgroundColor = "#cbd4d0";
@@ -86,3 +86,10 @@ socket.on("assignSelfID", data => {
 socket.on("playerDead", data => {});
 
 socket.on("playerAlive", data => {});
+
+socket.on(
+  "showKillMessage",
+  data(() => {
+    deadPlayersMessage.push(data);
+  })
+);

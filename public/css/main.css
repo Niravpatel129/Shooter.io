@@ -14,3 +14,11 @@
 .scoreboard {
   position: fixed;
 }
+
+.killMessage {
+  visibility: hidden;
+  position: absolute;
+  margin: 25px;
+  padding: 10px;
+  border: 2px solid black;
+}

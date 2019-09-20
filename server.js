@@ -43,6 +43,10 @@ io.on("connection", function(socket) {
     console.log("user left :(");
     users.removeUser(socket.id);
   });
+
+  socket.on("showKillMessage", function(data) {
+    socket.emit("showKillMessage", data);
+  });
 });
 
 server.listen(port, () => {
