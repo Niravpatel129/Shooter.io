@@ -3,8 +3,8 @@ class Users {
     this.users = [];
     this.bullets = [];
   }
-  addUser(id, x, y, bullets, alive) {
-    let user = { id, x, y, bullets, alive };
+  addUser(id, x, y, bullets, alive, name) {
+    let user = { id, x, y, bullets, alive, name };
     this.users.push(user);
     return user;
   }
@@ -12,7 +12,6 @@ class Users {
   playerDead(id) {
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === id) {
-        console.log("died");
         this.users[i].alive = false;
       }
     }
@@ -39,7 +38,7 @@ class Users {
     return this.users.filter(user => user.id === id)[0];
   }
 
-  updateUserCords(socketid, x, y, bullets, alive) {
+  updateUserCords(socketid, x, y, bullets, alive, name) {
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === socketid) {
         this.users[i].bullets = [];
@@ -47,8 +46,19 @@ class Users {
         this.users[i].y = y;
         this.users[i].bullets = bullets;
         this.users[i].alive = alive;
+        this.users[i].name = name;
       }
     }
+  }
+
+  checkNameValid(data) {
+    let returnValue = true;
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].name === data) {
+        returnValue = false;
+      }
+    }
+    return returnValue;
   }
 
   getUserList(room) {

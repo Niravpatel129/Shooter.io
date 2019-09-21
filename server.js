@@ -13,14 +13,28 @@ app.use(express.static("public"));
 io.on("connection", function(socket) {
   socket.emit("assignSelfID", socket.id);
   socket.on("firstConnect", data => {
-    users.addUser(socket.id, data.x, data.y, data.bullets, data.alive);
+    users.addUser(
+      socket.id,
+      data.x,
+      data.y,
+      data.bullets,
+      data.alive,
+      data.name
+    );
   });
 
   // this is the only function that called on a loop // to transmite the data, i could lower
   // server load by making this a interval instead of a 60tick transmision
   socket.on("update", data => {
     // [] in the future refacor this function
-    users.updateUserCords(socket.id, data.x, data.y, data.bullets, data.alive);
+    users.updateUserCords(
+      socket.id,
+      data.x,
+      data.y,
+      data.bullets,
+      data.alive,
+      data.name
+    );
 
     // [] in the future need to refactor this to send data of global objects
     // [] which get genearted when the server is initalized
@@ -28,9 +42,7 @@ io.on("connection", function(socket) {
   });
 
   socket.on("playerDead", data => {
-    console.log("test");
     users.playerDead(data);
-    console.log(`user died`);
     socket.broadcast.emit("playerDead", socket.id);
   });
 
@@ -40,8 +52,11 @@ io.on("connection", function(socket) {
   });
 
   socket.on("disconnect", function() {
-    console.log("user left :(");
     users.removeUser(socket.id);
+  });
+
+  socket.on("getNameValid", function(data) {
+    socket.emit("getNameValid", users.checkNameValid(data));
   });
 
   socket.on("showKillMessage", function(data) {

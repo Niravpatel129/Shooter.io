@@ -26,3 +26,35 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   border: 2px solid black;
 }
+
+body {
+  width: 100%;
+}
+.overlap {
+  width: 100%;
+  height: 100%;
+  background-color: lightblue;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  border-bottom: 1px solid black;
+  width: 100%;
+  height: 10%;
+  font-size: 34px;
+  text-align: center;
+}
+
+.smaller {
+  width: 40%;
+  margin: 0 auto;
+  padding-top: 20%;
+  text-align: center;
+}
+
+.fs-field-label {
+  font-size: 44px;
+  display: block;
+}

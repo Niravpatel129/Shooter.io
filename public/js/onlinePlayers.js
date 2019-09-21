@@ -55,9 +55,9 @@ class OnlinePlayer {
                 player.gotHit();
                 socket.emit(
                   "showKillMessage",
-                  `${serverPlayers[j].id} ${socket.id}`
+                  `${serverPlayers[j].name} ${player.name}`
                 );
-                console.log(`${serverPlayers[j].id} ${socket.id}`);
+                console.log(`${serverPlayers[j].id} ${player.name}`);
               }
             }
           }

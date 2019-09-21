@@ -3,11 +3,12 @@ class Player {
     this.x = 0;
     this.y = 0;
     this.speed = 5;
+    this.name = localPlayerName;
     this.bullets = bulletsFired;
     this.color = color(255, 204, 100);
     this.alive = true;
     socket.emit("firstConnect", this);
-    this.playerName = "You";
+    this.name = localPlayerName;
     this.isPlayerAlive = true;
   }
 
@@ -77,11 +78,10 @@ class Player {
     //TEXT
     fill(255);
     textAlign(CENTER);
-    text(this.playerName, this.x, this.y);
+    text(this.name, this.x, this.y);
   }
 
   gotHit() {
-    console.log("got hit");
     socket.emit("playerDead", selfSocketId);
     this.alive = false;
     this.color = color(1, 1, 1);
@@ -91,7 +91,7 @@ class Player {
       this.color = color(255, 204, 100);
       this.bullets = [];
       this.x = 0;
-      this.playerName = "You";
+      this.playerName = localPlayerName;
       this.y = 0;
       this.alive = true;
     }, 5000);
