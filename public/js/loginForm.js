@@ -9,6 +9,7 @@ $("input").keydown(function(e) {
         $(".overlap").css("display", "none");
         Playing = true;
         player.name = localPlayerName;
+        player.emitFirstConnect();
       }
     });
   }

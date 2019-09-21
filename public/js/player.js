@@ -7,9 +7,15 @@ class Player {
     this.bullets = bulletsFired;
     this.color = color(255, 204, 100);
     this.alive = true;
-    socket.emit("firstConnect", this);
     this.name = localPlayerName;
     this.isPlayerAlive = true;
+    this.playerR = playerSize;
+
+    // emit if playing is playing
+  }
+
+  emitFirstConnect() {
+    socket.emit("firstConnect", this);
   }
 
   move() {
@@ -73,12 +79,18 @@ class Player {
     this.bullets = bulletsFired;
     stroke(127, 63, 120);
     fill(this.color);
-    ellipse(this.x, this.y, playerSize, playerSize);
+    ellipse(this.x, this.y, this.playerR, this.playerR);
 
     //TEXT
     fill(255);
     textAlign(CENTER);
     text(this.name, this.x, this.y);
+
+    if (!this.alive) {
+      for (let i = 0; i < this.playerR; i++) {
+        this.playerR -= 0.1;
+      }
+    }
   }
 
   gotHit() {
@@ -86,6 +98,7 @@ class Player {
     this.alive = false;
     this.color = color(1, 1, 1);
     this.playerName = "Dead :X";
+
     setTimeout(() => {
       socket.emit("playerBackAlive");
       this.color = color(255, 204, 100);
@@ -94,6 +107,7 @@ class Player {
       this.playerName = localPlayerName;
       this.y = 0;
       this.alive = true;
+      this.playerR = playerSize;
     }, 5000);
   }
 
