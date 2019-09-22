@@ -57,6 +57,12 @@ class OnlinePlayer {
                   "showKillMessage",
                   `${serverPlayers[j].name} ${player.name}`
                 );
+
+                socket.emit(
+                  "updatePoints",
+                  `${serverPlayers[j].id} ${selfSocketId}`
+                );
+
                 console.log(`${serverPlayers[j].id} ${player.name}`);
               }
             }

@@ -1,7 +1,7 @@
 let socket = io();
 let Playing;
 let selfSocketId;
-var arrayofShots = [];
+let arrayofShots = [];
 let serverPlayers;
 let onlinePlayers;
 // inital
@@ -89,6 +89,7 @@ socket.on("playerDead", data => {});
 socket.on("playerAlive", data => {});
 
 socket.on("showKillMessage", data => {
+  socket.emit("getScore");
   deadPlayersMessage.push(data);
   showKillMessage();
 });

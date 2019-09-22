@@ -11,7 +11,7 @@ function showKillMessage() {
       if (playersInMessage[1] === socket.id) {
         playersInMessage[1] = `<b style='color: blue'>${player.name}</b>`;
       }
-      var x = $(".killMessage").html(
+      let x = $(".killMessage").html(
         `${playersInMessage[0]} <b style="color: red">KILLED</b> ${
           playersInMessage[1]
         }`

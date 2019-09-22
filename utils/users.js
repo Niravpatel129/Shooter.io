@@ -3,8 +3,8 @@ class Users {
     this.users = [];
     this.bullets = [];
   }
-  addUser(id, x, y, bullets, alive, name) {
-    let user = { id, x, y, bullets, alive, name };
+  addUser(id, x, y, bullets, alive, name, score) {
+    let user = { id, x, y, bullets, alive, name, score };
     this.users.push(user);
     return user;
   }
@@ -46,7 +46,7 @@ class Users {
         this.users[i].y = y;
         this.users[i].bullets = bullets;
         this.users[i].alive = alive;
-        this.users[i].name = name;
+        // this.users[i].name = name;
       }
     }
   }
@@ -59,6 +59,29 @@ class Users {
       }
     }
     return returnValue;
+  }
+
+  updateScore(killer, deadPlayer) {
+    for (let i = 0; i < this.users.length; i++) {
+      if (this.users[i].id === killer) {
+        this.users[i].score += 5;
+      }
+      if (this.users[i].id === deadPlayer) {
+        if (this.users[i].score >= 5) {
+          this.users[i].score -= 5;
+        } else {
+          this.users[i].score = 0;
+        }
+      }
+    }
+  }
+
+  getScore() {
+    let scores = [];
+    for (let i = 0; i < this.users.length; i++) {
+      scores.push({ name: this.users[i].name, score: this.users[i].score });
+    }
+    return scores;
   }
 
   getUserList(room) {

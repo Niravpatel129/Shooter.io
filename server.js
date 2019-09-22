@@ -19,7 +19,8 @@ io.on("connection", function(socket) {
       data.y,
       data.bullets,
       data.alive,
-      data.name
+      data.name,
+      0
     );
   });
 
@@ -51,12 +52,24 @@ io.on("connection", function(socket) {
     socket.emit("playerBackAlive", socket.id);
   });
 
+  socket.on("updatePoints", function(data) {
+    let players = data.split(" ");
+    let killer = players[0];
+    let deadPlayer = players[1];
+    users.updateScore(killer, deadPlayer);
+  });
+
   socket.on("disconnect", function() {
     users.removeUser(socket.id);
+    io.emit("getScore", users.getScore());
   });
 
   socket.on("getNameValid", function(data) {
     socket.emit("getNameValid", users.checkNameValid(data));
+  });
+
+  socket.on("getScore", function() {
+    io.emit("getScore", users.getScore());
   });
 
   socket.on("showKillMessage", function(data) {
