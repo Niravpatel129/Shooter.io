@@ -11,10 +11,6 @@
   user-select: none;
 }
 
-.scoreboard {
-  position: fixed;
-}
-
 .killMessage {
   display: none;
   color: blue;

@@ -9,6 +9,7 @@ function showKillMessage() {
       }
 
       if (playersInMessage[1] === socket.id) {
+        deathSound.play();
         playersInMessage[1] = `<b style='color: blue'>${player.name}</b>`;
       }
       let x = $(".killMessage").html(

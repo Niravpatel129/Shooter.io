@@ -1,0 +1,21 @@
+.scoreboard {
+  font-size: 14px;
+  background-color: rgba(90, 50, 141, 0.9);
+  line-height: 1.5;
+  color: white;
+  width: 10%;
+  text-shadow: 2px 2px black;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 17px;
+  position: fixed;
+  right: 5%;
+  top: 5%;
+}
+
+.scoreboard h5 {
+  font-size: 12px;
+  background-color: gray;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}

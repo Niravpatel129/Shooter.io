@@ -32,7 +32,7 @@ function setup() {
   player = new Player();
   onlinePlayers = new OnlinePlayer();
   shootSound.setVolume(0.4);
-  deathSound.setVolume(0.4);
+  deathSound.setVolume(0.8);
 }
 
 function draw() {
