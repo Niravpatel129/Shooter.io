@@ -1,7 +1,7 @@
 class Player {
   constructor() {
-    this.x = 0;
-    this.y = 0;
+    this.x = random(-600, 600);
+    this.y = random(-600, 600);
     this.speed = 5;
     this.name = localPlayerName;
     this.bullets = bulletsFired;
@@ -63,7 +63,8 @@ class Player {
   }
 
   shoot() {
-    if (this.alive) {
+    if (this.alive && Playing) {
+      shootSound.play();
       let mouseVector = getDirectionTo(mouseX, mouseY, width, height);
       let oneBullet = new bullet(
         this.x,
@@ -94,6 +95,8 @@ class Player {
   }
 
   gotHit() {
+    deathSound.play();
+    shootSound.stop();
     socket.emit("playerDead", selfSocketId);
     this.alive = false;
     this.color = color(1, 1, 1);
@@ -103,9 +106,9 @@ class Player {
       socket.emit("playerBackAlive");
       this.color = color(255, 204, 100);
       this.bullets = [];
-      this.x = 0;
       this.playerName = localPlayerName;
-      this.y = 0;
+      this.x = random(-600, 600);
+      this.y = random(-600, 600);
       this.alive = true;
       this.playerR = playerSize;
     }, 5000);

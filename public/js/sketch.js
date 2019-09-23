@@ -9,7 +9,7 @@ let localPlayerName;
 let bulletsFired = [];
 let deadPlayersMessage = [];
 //
-
+let mySound;
 let backgroundColor = "#cbd4d0";
 
 let playerSize = 50;
@@ -22,10 +22,17 @@ socket.on("connect", () => {
   console.log("connection was sucessful");
 });
 
+function preload() {
+  shootSound = loadSound("assets/shoot.wav");
+  deathSound = loadSound("assets/clack.ogg");
+}
+
 function setup() {
   createCanvas(displayWidth, displayHeight);
   player = new Player();
   onlinePlayers = new OnlinePlayer();
+  shootSound.setVolume(0.4);
+  deathSound.setVolume(0.4);
 }
 
 function draw() {
