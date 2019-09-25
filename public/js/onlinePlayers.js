@@ -9,9 +9,11 @@ class OnlinePlayer {
     this.color = "#c878c0";
     this.text = "OPPONENT";
     this.bulletRadius = bulletRadius;
-    setInterval(() => {
-      draw();
-    }, 100);
+
+    // REMOVED THIS FOR NOW
+    // setInterval(() => {
+    //   draw();
+    // }, 100);
   }
 
   draw() {

@@ -17,7 +17,7 @@ function showKillMessage() {
           playersInMessage[1]
         }`
       );
-      setInterval(() => {
+      setTimeout(() => {
         deadPlayersMessage.splice(i, 1);
         showKillMessage();
       }, 5000);

@@ -24,8 +24,6 @@ io.on("connection", function(socket) {
     );
   });
 
-  // this is the only function that called on a loop // to transmite the data, i could lower
-  // server load by making this a interval instead of a 60tick transmision
   socket.on("update", data => {
     // [] in the future refacor this function
     users.updateUserCords(
