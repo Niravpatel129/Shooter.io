@@ -54,3 +54,12 @@ input {
   font-size: 44px;
   display: block;
 }
+
+.version {
+  position: fixed;
+  bottom: 15px;
+  font-size: 16px;
+  right: 15px;
+  color: gray;
+  opacity: 0.5;
+}
