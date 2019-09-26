@@ -8,14 +8,22 @@ function getDirectionTo(mouseX, mouseY, width, height) {
 }
 
 class bullet {
-  constructor(x, y, xSpd, ySpd) {
-    this.startingX = player.x;
-    this.startingY = player.y;
+  constructor(x, y, xSpd, ySpd, bulletShooter, socketid, range) {
+    this.startingX = x;
+    this.startingY = y;
+
+    this.range = range;
+    this.bulletshotBy = bulletShooter;
+    this.socketid = socketid;
+
     this.x = x;
     this.y = y;
+
     this.xSpd = 12 * xSpd;
     this.ySpd = 12 * ySpd;
+
     this.color = color(120, 210, 30);
+
     this.bulletRadius = bulletRadius;
   }
 
@@ -36,6 +44,29 @@ class bullet {
     this.ySpd *= 0.994;
   }
 
+  checkCollison() {
+    if (player.alive) {
+      let serverBulletVector = createVector(this.x, this.y);
+      let localVector = createVector(player.x, player.y);
+      let d = p5.Vector.dist(localVector, serverBulletVector);
+
+      if (d <= player.playerR + this.bulletRadius) {
+        console.log("hit");
+        this.bulletRadius = 0;
+        this.x = -9999;
+        this.y = -9999;
+
+        player.gotHit();
+        socket.emit("showKillMessage", {
+          shooterName: `${this.bulletshotBy}`,
+          deadPlayerName: `${player.name}`,
+          shooterSocketID: `${this.socketid}`,
+          deadPlayerSocketID: `${selfSocketId}`
+        });
+      }
+    }
+  }
+
   outOfBounds() {
     let gridRadius = canvasMarginX;
     let xdis = this.startingX - this.x;
@@ -50,7 +81,12 @@ class bullet {
       return true;
     }
 
-    if (xdis > 550 || xdis < -550 || ydis > 550 || ydis < -550) {
+    if (
+      xdis > this.range ||
+      xdis < -this.range ||
+      ydis > this.range ||
+      ydis < -this.range
+    ) {
       return true;
     } else {
       return false;

@@ -68,7 +68,7 @@ class Users {
       }
       if (this.users[i].id === deadPlayer) {
         if (this.users[i].score >= 5) {
-          this.users[i].score -= 5;
+          // this.users[i].score -= 5;
         } else {
           this.users[i].score = 0;
         }

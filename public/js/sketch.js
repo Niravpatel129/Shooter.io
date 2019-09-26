@@ -7,7 +7,6 @@ let onlinePlayers;
 // inital
 let localPlayerName;
 let bulletsFired = [];
-let deadPlayersMessage = [];
 //
 let mySound;
 let backgroundColor = "#cbd4d0";
@@ -19,6 +18,8 @@ let canvasMarginX = 1000;
 let canvasMarginY = 1000;
 //
 
+//
+let serverBulletsFired = [];
 bullets = [];
 
 socket.on("connect", () => {
@@ -73,6 +74,17 @@ function draw() {
 
     // draw server player
     onlinePlayers.draw();
+
+    // draw server bullets
+    for (let l = 0; l < serverBulletsFired.length; l++) {
+      serverBulletsFired[l].display();
+      serverBulletsFired[l].update();
+      serverBulletsFired[l].checkCollison();
+
+      if (serverBulletsFired[l].outOfBounds()) {
+        serverBulletsFired.splice(l, 1);
+      }
+    }
   }
 }
 
@@ -103,9 +115,7 @@ socket.on("playerDead", data => {});
 socket.on("playerAlive", data => {});
 
 socket.on("showKillMessage", data => {
-  socket.emit("getScore");
-  deadPlayersMessage.push(data);
-  showKillMessage();
+  showKillMessage(data);
 });
 
 socket.on("getblobs", data => {
@@ -120,4 +130,19 @@ socket.on("getblobs", data => {
 socket.on("deleteBlob", id => {
   console.log(id);
   serverBlobs.splice(id, 1);
+});
+
+socket.on("shootingData", data => {
+  if (data.player.id != selfSocketId) {
+    let newBullet = new bullet(
+      data.player.x,
+      data.player.y,
+      data.vector[0],
+      data.vector[1],
+      data.player.name,
+      data.player.id,
+      data.player.shootingRange
+    );
+    serverBulletsFired.push(newBullet);
+  }
 });

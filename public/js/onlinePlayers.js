@@ -35,42 +35,16 @@ class OnlinePlayer {
         fill("#ffffff");
         text(this.text, serverPlayers[j].x, serverPlayers[j].y);
 
-        //draw server bullets
-        if (serverPlayers[j].bullets.length > 0) {
-          for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
-            ellipse(
-              serverPlayers[j].bullets[m].x,
-              serverPlayers[j].bullets[m].y,
-              this.bulletRadius
-            );
+        // draw server bullets
+        // if (serverPlayers[j].bullets.length > 0) {
+        //   for (let m = 0; m < serverPlayers[j].bullets.length; m++) {
+        //     ellipse(
+        //       serverPlayers[j].bullets[m].x,
+        //       serverPlayers[j].bullets[m].y,
+        //       this.bulletRadius
+        //     );
 
-            // CHECK COLLISION FOR THESE BULLETS ^
-            if (player.alive) {
-              let serverBulletVector = createVector(
-                serverPlayers[j].bullets[m].x,
-                serverPlayers[j].bullets[m].y
-              );
-              let localVector = createVector(player.x, player.y);
-              let d = p5.Vector.dist(localVector, serverBulletVector);
-              arrayofShots.push(d);
-
-              if (d <= playerSize + 30) {
-                player.gotHit();
-                socket.emit(
-                  "showKillMessage",
-                  `${serverPlayers[j].name} ${player.name}`
-                );
-
-                socket.emit(
-                  "updatePoints",
-                  `${serverPlayers[j].id} ${selfSocketId}`
-                );
-
-                console.log(`${serverPlayers[j].id} ${player.name}`);
-              }
-            }
-          }
-        }
+        //     // CHECK COLLISION FOR THESE BULLETS ^
       }
     }
   }

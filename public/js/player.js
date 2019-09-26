@@ -1,5 +1,6 @@
 class Player {
   constructor() {
+    this.id = selfSocketId;
     this.x = random(-600, 600);
     this.y = random(-600, 600);
     this.speed = 5;
@@ -10,7 +11,7 @@ class Player {
     this.name = localPlayerName;
     this.isPlayerAlive = true;
     this.playerR = playerSize;
-
+    this.shootingRange = 500;
     // emit if playing is playing
   }
 
@@ -73,6 +74,8 @@ class Player {
         mouseVector[1]
       );
       bulletsFired.push(oneBullet);
+
+      socket.emit("mouseVector", { player: this, vector: mouseVector });
     }
   }
 
@@ -111,7 +114,7 @@ class Player {
       this.y = random(-600, 600);
       this.alive = true;
       this.playerR = playerSize;
-    }, 5000);
+    }, 3000);
   }
 
   emitToServer() {

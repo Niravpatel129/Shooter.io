@@ -16,8 +16,8 @@ app.use(express.static("public"));
 io.on("connection", function(socket) {
   socket.emit("assignSelfID", socket.id);
   blobs.generateBlobs();
-  let blobsData = blobs.getBlobs();
-  io.emit("getblobs", blobsData);
+  // let blobsData = blobs.getBlobs();
+  // io.emit("getblobs", blobsData);
   socket.on("firstConnect", data => {
     users.addUser(
       socket.id,
@@ -56,13 +56,6 @@ io.on("connection", function(socket) {
     socket.emit("playerBackAlive", socket.id);
   });
 
-  socket.on("updatePoints", function(data) {
-    let players = data.split(" ");
-    let killer = players[0];
-    let deadPlayer = players[1];
-    users.updateScore(killer, deadPlayer);
-  });
-
   socket.on("disconnect", function() {
     users.removeUser(socket.id);
     io.emit("getScore", users.getScore());
@@ -77,12 +70,17 @@ io.on("connection", function(socket) {
   });
 
   socket.on("showKillMessage", function(data) {
+    users.updateScore(data.shooterSocketID, data.selfSocketId);
     io.emit("showKillMessage", data);
   });
 
-  socket.on("collisoonWithPowerBlob", data => {
-    blobs.remmoveBlob(data);
-    io.emit("deleteBlob", data.id);
+  // socket.on("collisoonWithPowerBlob", data => {
+  //   blobs.remmoveBlob(data);
+  //   io.emit("deleteBlob", data.id);
+  // });
+
+  socket.on("mouseVector", data => {
+    io.emit("shootingData", data);
   });
 });
 
