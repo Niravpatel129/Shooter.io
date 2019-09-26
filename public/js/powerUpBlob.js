@@ -1,13 +1,13 @@
 class powerUpBlob {
-  constructor(id, x, y, r) {
+  constructor(id, x, y, r, c1, c2, c3) {
     this.id = id;
     this.x = x;
     this.y = y;
     this.r = r;
 
-    this.c1 = Math.floor(Math.random() * 255);
-    this.c2 = Math.floor(Math.random() * 255);
-    this.c3 = Math.floor(Math.random() * 255);
+    this.c1 = c1;
+    this.c2 = c2;
+    this.c3 = c3;
   }
 
   draw() {
@@ -22,11 +22,12 @@ class powerUpBlob {
     );
 
     if (d <= playerSize + this.r) {
-      // socket.emit("collisoonWithPowerBlob", this);
+      socket.emit("collisoonWithPowerBlob", this);
       console.log("collision");
       this.r = 0;
       this.x = -9999;
       this.y = -9999;
+      deathSound.play();
     }
   }
 }

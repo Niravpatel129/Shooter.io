@@ -56,11 +56,13 @@ function draw() {
     strokeWeight(4);
     stroke(51);
     rect(-canvasMarginX, -canvasMarginX, canvasMarginX * 2, canvasMarginX * 2);
+
     //draw powerUpBlobs
     for (let i = 0; i < serverBlobs.length; i++) {
       serverBlobs[i].draw();
       serverBlobs[i].checkCollision();
     }
+
     //draw bullets
     for (let i = 0; i < bulletsFired.length; i++) {
       bulletsFired[i].display();
@@ -125,13 +127,22 @@ socket.on("getblobs", data => {
   serverBlobs = [];
   for (let i = 0; i < data.length; i++) {
     serverBlobs.push(
-      new powerUpBlob(data[i].id, data[i].x, data[i].y, data[i].r)
+      new powerUpBlob(
+        data[i].id,
+        data[i].x,
+        data[i].y,
+        data[i].r,
+        data[i].c2,
+        data[i].r,
+        data[i].c3
+      )
     );
   }
 });
 
 socket.on("deleteBlob", id => {
-  serverBlobs.splice(id, 1);
+  console.log(id);
+  serverBlobs.splice(id - 1, 1);
 });
 
 socket.on("shootingData", data => {

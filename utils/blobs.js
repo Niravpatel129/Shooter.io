@@ -12,7 +12,12 @@ class Blobs {
         let x = Math.random() * (max - min) + min;
         let y = Math.random() * (max - min) + min;
         let r = Math.random() * (35 - 10) + 10;
-        this.blobs.push({ id, x, y, r });
+
+        let c1 = Math.floor(Math.random() * 255);
+        let c2 = Math.floor(Math.random() * 255);
+        let c3 = Math.floor(Math.random() * 255);
+
+        this.blobs.push({ id, x, y, r, c1, c2, c3 });
       }
     } else {
       return this.blobs;

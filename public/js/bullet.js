@@ -45,7 +45,7 @@ class bullet {
   }
 
   checkCollison() {
-    if (player.alive) {
+    if (player.alive && this.socketid != selfSocketId) {
       let serverBulletVector = createVector(this.x, this.y);
       let localVector = createVector(player.x, player.y);
       let d = p5.Vector.dist(localVector, serverBulletVector);

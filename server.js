@@ -15,9 +15,13 @@ app.use(express.static("public"));
 
 io.on("connection", function(socket) {
   socket.emit("assignSelfID", socket.id);
+
   blobs.generateBlobs();
-  // let blobsData = blobs.getBlobs();
-  // io.emit("getblobs", blobsData);
+
+  let blobsData = blobs.getBlobs();
+
+  io.emit("getblobs", blobsData);
+
   socket.on("firstConnect", data => {
     users.addUser(
       socket.id,
@@ -74,10 +78,10 @@ io.on("connection", function(socket) {
     io.emit("showKillMessage", data);
   });
 
-  // socket.on("collisoonWithPowerBlob", data => {
-  //   blobs.remmoveBlob(data);
-  //   io.emit("deleteBlob", data.id);
-  // });
+  socket.on("collisoonWithPowerBlob", data => {
+    blobs.remmoveBlob(data);
+    io.emit("deleteBlob", data.id);
+  });
 
   socket.on("mouseVector", data => {
     io.emit("shootingData", data);

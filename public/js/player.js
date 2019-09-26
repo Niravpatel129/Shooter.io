@@ -82,7 +82,10 @@ class Player {
         this.x,
         this.y,
         mouseVector[0],
-        mouseVector[1]
+        mouseVector[1],
+        localPlayerName,
+        selfSocketId,
+        500
       );
       bulletsFired.push(oneBullet);
 
