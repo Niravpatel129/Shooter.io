@@ -37,11 +37,16 @@ class bullet {
   }
 
   outOfBounds() {
-    let gridRadius = 800;
+    let gridRadius = canvasMarginX;
     let xdis = this.startingX - this.x;
     let ydis = this.startingY - this.y;
 
-    if (this.x <= -800 || this.x >= 800 || this.y <= -800 || this.y >= 800) {
+    if (
+      this.x <= -gridRadius ||
+      this.x >= gridRadius ||
+      this.y <= -gridRadius ||
+      this.y >= gridRadius
+    ) {
       return true;
     }
 

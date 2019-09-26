@@ -12,8 +12,11 @@ let deadPlayersMessage = [];
 let mySound;
 let backgroundColor = "#cbd4d0";
 
+let serverBlobs = [];
 let playerSize = 50;
 let bulletRadius = 30;
+let canvasMarginX = 1000;
+let canvasMarginY = 1000;
 //
 
 bullets = [];
@@ -48,8 +51,12 @@ function draw() {
     //
     strokeWeight(4);
     stroke(51);
-    rect(-800, -800, 1600, 1600);
-
+    rect(-canvasMarginX, -canvasMarginX, canvasMarginX * 2, canvasMarginX * 2);
+    //draw powerUpBlobs
+    for (let i = 0; i < serverBlobs.length; i++) {
+      serverBlobs[i].draw();
+      serverBlobs[i].checkCollision();
+    }
     //draw bullets
     for (let i = 0; i < bulletsFired.length; i++) {
       bulletsFired[i].display();
@@ -99,4 +106,18 @@ socket.on("showKillMessage", data => {
   socket.emit("getScore");
   deadPlayersMessage.push(data);
   showKillMessage();
+});
+
+socket.on("getblobs", data => {
+  serverBlobs = [];
+  for (let i = 0; i < data.length; i++) {
+    serverBlobs.push(
+      new powerUpBlob(data[i].id, data[i].x, data[i].y, data[i].r)
+    );
+  }
+});
+
+socket.on("deleteBlob", id => {
+  console.log(id);
+  serverBlobs.splice(id, 1);
 });

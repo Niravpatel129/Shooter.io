@@ -19,7 +19,7 @@ class Player {
   }
 
   move() {
-    let gridRadius = 800;
+    let gridRadius = canvasMarginX;
     let endColor = "#e35656";
 
     if (this.alive) {

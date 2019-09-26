@@ -2,7 +2,10 @@ const http = require("http");
 const express = require("express");
 const socketIO = require("socket.io");
 const { Users } = require("./utils/users");
+const { Blobs } = require("./utils/blobs");
+
 let users = new Users();
+let blobs = new Blobs();
 
 const port = process.env.PORT || 3000;
 let app = express();
@@ -12,6 +15,9 @@ app.use(express.static("public"));
 
 io.on("connection", function(socket) {
   socket.emit("assignSelfID", socket.id);
+  blobs.generateBlobs();
+  let blobsData = blobs.getBlobs();
+  io.emit("getblobs", blobsData);
   socket.on("firstConnect", data => {
     users.addUser(
       socket.id,
@@ -72,6 +78,11 @@ io.on("connection", function(socket) {
 
   socket.on("showKillMessage", function(data) {
     io.emit("showKillMessage", data);
+  });
+
+  socket.on("collisoonWithPowerBlob", data => {
+    blobs.remmoveBlob(data);
+    io.emit("deleteBlob", data.id);
   });
 });
 
