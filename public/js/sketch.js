@@ -5,6 +5,9 @@ let arrayofShots = [];
 let serverPlayers;
 let onlinePlayers;
 // inital
+
+let localPlayerData;
+
 let localPlayerName;
 let bulletsFired = [];
 //
@@ -128,7 +131,6 @@ socket.on("getblobs", data => {
 });
 
 socket.on("deleteBlob", id => {
-  console.log(id);
   serverBlobs.splice(id, 1);
 });
 

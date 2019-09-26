@@ -13,6 +13,9 @@ class Player {
     this.playerR = playerSize;
     this.shootingRange = 500;
     // emit if playing is playing
+    localPlayerData = this;
+
+    socket.emit("update", localPlayerData);
   }
 
   emitFirstConnect() {
@@ -25,6 +28,8 @@ class Player {
 
     if (this.alive) {
       if (keyIsDown(37) || keyIsDown(65)) {
+        socket.emit("update", localPlayerData);
+
         //LEFT
         if (this.x >= -gridRadius) {
           this.x -= this.speed;
@@ -34,6 +39,8 @@ class Player {
         }
       }
       if (keyIsDown(38) || keyIsDown(87)) {
+        socket.emit("update", localPlayerData);
+
         //UP
         if (this.y >= -gridRadius) {
           this.y -= this.speed;
@@ -43,6 +50,8 @@ class Player {
         }
       }
       if (keyIsDown(39) || keyIsDown(68)) {
+        socket.emit("update", localPlayerData);
+
         if (this.x <= gridRadius) {
           //RIGHT
           this.x += this.speed;
@@ -52,6 +61,8 @@ class Player {
         }
       }
       if (keyIsDown(40) || keyIsDown(83)) {
+        socket.emit("update", localPlayerData);
+
         //DOWN
         if (this.y <= gridRadius) {
           this.y += this.speed;
@@ -118,6 +129,6 @@ class Player {
   }
 
   emitToServer() {
-    socket.emit("update", this);
+    localPlayerData = this;
   }
 }
