@@ -45,24 +45,26 @@ class bullet {
   }
 
   checkCollison() {
-    if (player.alive && this.socketid != selfSocketId) {
-      let serverBulletVector = createVector(this.x, this.y);
-      let localVector = createVector(player.x, player.y);
-      let d = p5.Vector.dist(localVector, serverBulletVector);
+    if (player.alive) {
+      if (this.socketid != selfSocketId) {
+        let serverBulletVector = createVector(this.x, this.y);
+        let localVector = createVector(player.x, player.y);
+        let d = p5.Vector.dist(localVector, serverBulletVector);
 
-      if (d <= player.playerR + this.bulletRadius) {
-        console.log("hit");
-        this.bulletRadius = 0;
-        this.x = -9999;
-        this.y = -9999;
+        if (d <= player.playerR + this.bulletRadius) {
+          console.log("hit");
+          this.bulletRadius = 0;
+          this.x = -9999;
+          this.y = -9999;
 
-        player.gotHit();
-        socket.emit("showKillMessage", {
-          shooterName: `${this.bulletshotBy}`,
-          deadPlayerName: `${player.name}`,
-          shooterSocketID: `${this.socketid}`,
-          deadPlayerSocketID: `${selfSocketId}`
-        });
+          player.gotHit();
+          socket.emit("showKillMessage", {
+            shooterName: `${this.bulletshotBy}`,
+            deadPlayerName: `${player.name}`,
+            shooterSocketID: `${this.socketid}`,
+            deadPlayerSocketID: `${selfSocketId}`
+          });
+        }
       }
     }
   }
