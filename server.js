@@ -84,7 +84,7 @@ io.on("connection", function(socket) {
   });
 
   socket.on("mouseVector", data => {
-    io.emit("shootingData", data);
+    socket.broadcast.emit("shootingData", data);
   });
 });
 
