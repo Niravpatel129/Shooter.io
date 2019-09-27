@@ -5,6 +5,10 @@ $("input").keydown(function(e) {
     socket.emit("getNameValid", inputName);
     socket.on("getNameValid", result => {
       if (result) {
+        inputName = inputName
+          .toString()
+          .replace(/\s/g, "")
+          .substring(0, 5);
         localPlayerName = inputName.toUpperCase();
         $(".overlap").css("display", "none");
         Playing = true;

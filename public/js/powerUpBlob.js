@@ -23,7 +23,6 @@ class powerUpBlob {
 
     if (d <= playerSize + this.r) {
       socket.emit("collisoonWithPowerBlob", this);
-      console.log("collision");
       this.r = 0;
       this.x = -9999;
       this.y = -9999;
