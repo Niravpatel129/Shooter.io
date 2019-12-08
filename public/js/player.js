@@ -128,7 +128,8 @@ class Player {
       this.y = random(-600, 600);
       this.alive = true;
       this.playerR = playerSize;
-    }, 3000);
+      this.emitToServer();
+    }, 2000);
   }
 
   emitToServer() {
